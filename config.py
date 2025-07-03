@@ -8,6 +8,8 @@ FOLDER_SEEDS = os.path.join(BASE_DIR, "seeds")
 FOLDER_CIPHERS = os.path.join(BASE_DIR, "ciphers")
 BENCHMARKS_DIR = os.path.join(BASE_DIR, "benchmarks")
 
+ITERATIONS = 1000            # Numero di iterazioni per il benchmark
+
 DURATION = 1                 # Durata registrazione in secondi
 SAMPLERATE = 44100           # Frequenza di campionamento in Hz    
 CHANNELS = 1                 # numero di canali audio (mono)

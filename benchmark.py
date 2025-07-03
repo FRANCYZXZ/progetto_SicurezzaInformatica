@@ -3,12 +3,22 @@ import secrets
 import json
 import os
 from algorithm import get_cipher
-from config import CIPHER_MODE, BENCHMARKS_DIR, TIMESTAMP
+from config import CIPHER_MODE, BENCHMARKS_DIR, TIMESTAMP, ITERATIONS
 
 def run_benchmarks():
+    """
+    Esegue il benchmark comparativo delle prestazioni dei vari algoritmi di cifratura
+
+    - Genera una chiave casuale a 256 bit (32 byte) per la cifratura
+    - Genera una password casuale (stringa esadecimale lunga 128 caratteri)
+    - Esegue ITERATIONS iterazioni di cifratura per ciascuna modalità specificata
+    - Calcola il tempo medio di cifratura per ogni modalità in millisecondi
+    - Stampa i risultati su console in formato leggibile
+    - Salva i risultati in un file formato JSON all'interno della cartella `BENCHMARKS_DIR`
+    """
     key = secrets.token_bytes(32)
-    password = "test_password_to_encrypt"
-    results = benchmark_ciphers(key, password, iterations=1000)
+    password = secrets.token_bytes(64).hex()  # Password casuale di 64 byte in formato esadecimale
+    results = benchmark_ciphers(key, password)
     for mode, avg_time in results.items():
         print(f"Modalità {mode}: tempo medio cifratura = {avg_time*1000:.5f} ms")
 
@@ -23,7 +33,7 @@ def run_benchmarks():
     print(f"Risultati salvati in 'benchmark_results_{TIMESTAMP}.json'")
 
 
-def benchmark_ciphers(key, password, modes_to_test=None, iterations=1000):
+def benchmark_ciphers(key, password, modes_to_test=None):
     """
     Esegue il benchmark della cifratura per le modalità specificate
 
@@ -47,11 +57,11 @@ def benchmark_ciphers(key, password, modes_to_test=None, iterations=1000):
 
         # Misuro il tempo totale di 'iterations' cifrature
         start = time.perf_counter()
-        for _ in range(iterations):
+        for _ in range(ITERATIONS):
             _, _, _ = get_cipher(key, password)
         end = time.perf_counter()
 
-        avg_time = (end - start) / iterations
+        avg_time = (end - start) / ITERATIONS
         results[mode] = avg_time
 
     return results
