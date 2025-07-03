@@ -1,7 +1,7 @@
 import sounddevice as sd
 import wave
 import os
-import datetime
+from datetime import datetime
 from config import FOLDER_RECORDINGS, DURATION, SAMPLERATE, CHANNELS
 
 def record_audio():
@@ -12,10 +12,14 @@ def record_audio():
         numpy.ndarray: array monodimensionale dei campioni audio (int16)
     """
     print("Registrazione in corso...")
-    audio = sd.rec(int(DURATION * SAMPLERATE), SAMPLERATE, CHANNELS, dtype='int16')
-    sd.wait()
-    print("Registrazione terminata")
-    return audio.flatten()
+    try:
+        audio = sd.rec(int(DURATION * SAMPLERATE), SAMPLERATE, CHANNELS, dtype='int16')
+        sd.wait()
+        print("Registrazione terminata")
+        return audio.flatten()
+    except Exception as e:
+        print(f"Errore durante la registrazione: {e}")
+        return None
 
 def save_audio(audio_samples):
     """
@@ -28,7 +32,7 @@ def save_audio(audio_samples):
         timestamp
     """
     os.makedirs(FOLDER_RECORDINGS, exist_ok=True)
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = os.path.join(FOLDER_RECORDINGS, f"registrazione_{timestamp}.wav")
     
     with wave.open(filename, 'w') as wf:
@@ -37,5 +41,5 @@ def save_audio(audio_samples):
         wf.setframerate(SAMPLERATE)
         wf.writeframes(audio_samples.tobytes())
 
-    print(f"Audio salvato in: {filename}")
+    print(f"Audio salvato in: recordings/registrazione_{timestamp}.wav")
     return timestamp

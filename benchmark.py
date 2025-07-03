@@ -1,7 +1,9 @@
 import time
 import secrets
+import json
+import os
 from algorithm import get_cipher
-from config import CIPHER_MODE
+from config import CIPHER_MODE, BENCHMARKS_DIR, TIMESTAMP
 
 def run_benchmarks():
     key = secrets.token_bytes(32)
@@ -9,6 +11,17 @@ def run_benchmarks():
     results = benchmark_ciphers(key, password, iterations=1000)
     for mode, avg_time in results.items():
         print(f"Modalità {mode}: tempo medio cifratura = {avg_time*1000:.5f} ms")
+
+    os.makedirs(BENCHMARKS_DIR, exist_ok=True)
+
+    # Converti i tempi in ms e arrotonda a 5 decimali
+    results_ms = {mode: round(avg_time * 1000, 5) for mode, avg_time in results.items()}
+
+    with open(os.path.join(BENCHMARKS_DIR, f"benchmark_results_{TIMESTAMP}.json"), "w") as f:
+        json.dump(results_ms, f, indent=4)
+
+    print(f"Risultati salvati in 'benchmark_results_{TIMESTAMP}.json'")
+
 
 def benchmark_ciphers(key, password, modes_to_test=None, iterations=1000):
     """

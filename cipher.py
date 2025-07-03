@@ -27,4 +27,4 @@ def encrypt_password(key, password, timestamp):
         f.write(f"IV/NONCE: {iv_hex}\n")
         f.write(f"CIPHERTEXT: {ciphertext_hex}\n")
 
-    print(f"Password cifrata salvata in: {filename}")
+    print(f"Password cifrata salvata in: ciphers/cifrato_{timestamp}.txt")

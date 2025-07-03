@@ -24,8 +24,6 @@ def main():
     encrypt_password(seed, password, timestamp)
 
 if len(sys.argv) > 1 and sys.argv[1] == "test":
-    print("Esecuzione benchmark cifratura...")
     run_benchmarks()
-    print("Benchmark completato")
 else:
     main()

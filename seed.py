@@ -34,5 +34,5 @@ def save_seed(seed_bytes, timestamp):
     with open(filename, "w") as f:
         f.write(seed_bytes.hex())
 
-    print(f"Seed salvato in: {filename}")
+    print(f"Seed salvato in: seeds/seed_{timestamp}.txt")
     return filename

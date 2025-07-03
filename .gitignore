@@ -3,3 +3,4 @@ seeds/
 ciphers/
 __pycache__
 venv/
+benchmarks/

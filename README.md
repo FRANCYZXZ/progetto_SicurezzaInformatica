@@ -57,6 +57,9 @@ Verrà richiesto di inserire una password da cifrare; il programma registrerà a
 python main.py test
 ```
 
+I risultati vengono salvati automaticamente in un file JSON nella cartella `benchmarks/`.
+
+
 ## Struttura del progetto
 
 - audio.py: gestione registrazione e salvataggio audio.
