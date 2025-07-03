@@ -1,0 +1,5 @@
+recordings/
+seeds/
+ciphers/
+__pycache__
+venv/
