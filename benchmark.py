@@ -3,35 +3,27 @@ import secrets
 import json
 import os
 from algorithm import get_cipher
-from config import CIPHER_MODE, BENCHMARKS_DIR, TIMESTAMP, ITERATIONS
+from config import CIPHER_MODE, FOLDER_BENCHMARKS, TIMESTAMP, ITERATIONS
 
-def run_benchmarks():
+def run_benchmarks(key, password):
     """
     Esegue il benchmark comparativo delle prestazioni dei vari algoritmi di cifratura
 
-    - Genera una chiave casuale a 256 bit (32 byte) per la cifratura
-    - Genera una password casuale (stringa esadecimale lunga 128 caratteri)
     - Esegue ITERATIONS iterazioni di cifratura per ciascuna modalità specificata
     - Calcola il tempo medio di cifratura per ogni modalità in millisecondi
     - Stampa i risultati su console in formato leggibile
     - Salva i risultati in un file formato JSON all'interno della cartella `BENCHMARKS_DIR`
     """
-    key = secrets.token_bytes(32)
-    password = secrets.token_bytes(64).hex()  # Password casuale di 64 byte in formato esadecimale
-    results = benchmark_ciphers(key, password)
-    for mode, avg_time in results.items():
-        print(f"Modalità {mode}: tempo medio cifratura = {avg_time*1000:.5f} ms")
-
-    os.makedirs(BENCHMARKS_DIR, exist_ok=True)
+    results = benchmark_ciphers(key, password, modes_to_test=None)
+    os.makedirs(FOLDER_BENCHMARKS, exist_ok=True)
 
     # Converti i tempi in ms e arrotonda a 5 decimali
     results_ms = {mode: round(avg_time * 1000, 5) for mode, avg_time in results.items()}
 
-    with open(os.path.join(BENCHMARKS_DIR, f"benchmark_results_{TIMESTAMP}.json"), "w") as f:
+    with open(os.path.join(FOLDER_BENCHMARKS, f"benchmark_results_{TIMESTAMP}.json"), "w") as f:
         json.dump(results_ms, f, indent=4)
 
     print(f"Risultati salvati in 'benchmark_results_{TIMESTAMP}.json'")
-
 
 def benchmark_ciphers(key, password, modes_to_test=None):
     """

@@ -1,12 +1,12 @@
 import os
 from datetime import datetime
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FOLDER_BASE = os.path.dirname(os.path.abspath(__file__))
 
-FOLDER_RECORDINGS = os.path.join(BASE_DIR, "recordings")
-FOLDER_SEEDS = os.path.join(BASE_DIR, "seeds")
-FOLDER_CIPHERS = os.path.join(BASE_DIR, "ciphers")
-BENCHMARKS_DIR = os.path.join(BASE_DIR, "benchmarks")
+FOLDER_RECORDINGS = os.path.join(FOLDER_BASE, "recordings")
+FOLDER_SEEDS = os.path.join(FOLDER_BASE, "seeds")
+FOLDER_CIPHERS = os.path.join(FOLDER_BASE, "ciphers")
+FOLDER_BENCHMARKS = os.path.join(FOLDER_BASE, "benchmarks")
 
 ITERATIONS = 1000            # Numero di iterazioni per il benchmark
 
@@ -16,5 +16,5 @@ CHANNELS = 1                 # numero di canali audio (mono)
 
 TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-SEED_HASH_ALGORITHM = "md5"  # Algoritmo hash per il seed. Possibili valori: "sha256", "md5"
-CIPHER_MODE = "CTR"          # Modalità di cifratura
+SEED_HASH_ALGORITHM = "md5"  # Algoritmo hash per il seed, possibili valori: "sha256", "md5"
+CIPHER_MODE = "CTR"          # Modalità di cifratura, possibili valori: "CBC", "CFB", "OFB", "CTR", "GCM", "CHACHA20"

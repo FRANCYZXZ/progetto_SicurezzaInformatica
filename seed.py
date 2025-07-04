@@ -11,7 +11,7 @@ def extract_entropy(audio_samples):
     Returns:
         bytearray: bytes derivati dall'entropia, pronti per l'hash
     """
-    lsb_bits = [sample & 1 for sample in audio_samples]                       # sample & 1 restituisce 0 se il numero è pari, 1 se dispari
+    lsb_bits = [sample & 1 for sample in audio_samples]      # sample & 1 -> 0 se pari, 1 se dispari, estrae l'ultimo bit di ogni sample
     bitstring = ''.join(str(bit) for bit in lsb_bits)                         # Converte la lista di bit in una stringa binaria
     byte_chunks = [bitstring[i:i+8] for i in range(0, len(bitstring), 8)]     # Divide la stringa binaria in gruppi di 8 bit
     byte_array = bytearray(int(b, 2) for b in byte_chunks if len(b) == 8)     # Converte ciascun gruppo di 8 bit in un intero

@@ -2,8 +2,6 @@ from audio import record_audio, save_audio
 from seed import extract_entropy, save_seed
 from cipher import encrypt_password
 from algorithm import select_seed_algorithm
-from benchmark import run_benchmarks
-import sys
 
 def main():
     """
@@ -23,7 +21,5 @@ def main():
 
     encrypt_password(seed, password, timestamp)
 
-if len(sys.argv) > 1 and sys.argv[1] == "test":
-    run_benchmarks()
-else:
+if __name__ == "__main__":
     main()

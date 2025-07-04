@@ -34,10 +34,10 @@ def get_cipher(key, password, mode=None):
     Args:
         key: chiave simmetrica per la cifratura
         password: testo in chiaro da cifrare
-        mode: modalità di cifratura da utilizzare. Se None, usa la modalità di default definita in config
+        mode: modalità di cifratura da utilizzare. Se None, usa la modalità di default definita nel file config.py
 
     Returns:
-        tuple(ciphertext, iv, mode): (ciphertext esadecimale, iv o nonce esadecimale, mode modalità usata)
+        tuple(ciphertext, iv, mode): ciphertext esadecimale, iv o nonce esadecimale, mode modalità usata
 
     Raises:
         ValueError: se la modalità di cifratura non è supportata
