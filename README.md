@@ -1,6 +1,6 @@
 # Audio-Based Cryptographic Seeding and Encryption
 
-Questo progetto permette di generare una chiave crittografica casuale a partire da una registrazione audio, cifrare password con diverse modalità e misurare le performance di cifratura.
+Questo progetto permette di generare una chiave crittografica casuale a partire da una registrazione audio, cifrare password con diverse modalità e (opzionalmente) misurare le performance di cifratura.
 
 ## Funzionalità principali
 
@@ -8,8 +8,8 @@ Questo progetto permette di generare una chiave crittografica casuale a partire 
 - Estrazione entropia: estrae il bit meno significativo di ogni campione audio per generare dati casuali.
 - Generazione seed: applica un algoritmo di hash (SHA256 o MD5) per creare un seed crittografico.
 - Cifratura password: cifra password in input con diverse modalità (CBC, CFB, OFB, CTR, GCM, CHACHA20).
-- Benchmark: confronta i tempi medi di cifratura per le modalità supportate.
- 
+- Benchmark (opzionale): confronta i tempi medi di cifratura per tutte le modalità supportate.
+
 ## Requisiti
 
 - Python 3.8+
@@ -51,15 +51,6 @@ python main.py
 
 Verrà richiesto di inserire una password da cifrare; il programma registrerà audio, estrarrà il seed, e salverà password cifrata, seed e audio.
 
-2. Eseguire i benchmark
-
-```
-python main.py test
-```
-
-I risultati vengono salvati automaticamente in un file JSON nella cartella `benchmarks/`.
-
-
 ## Struttura del progetto
 
 - audio.py: gestione registrazione e salvataggio audio.
@@ -68,4 +59,4 @@ I risultati vengono salvati automaticamente in un file JSON nella cartella `benc
 - cipher.py: cifratura password e salvataggio.
 - benchmark.py: funzioni di benchmark.
 - config.py: configurazioni e parametri globali.
-- main.py: script principale e entrypoint.
+- main.py: script principale.
