@@ -3,7 +3,7 @@ from benchmark import run_benchmarks
 from algorithm import get_cipher
 import os
 
-def encrypt_password(key, password, timestamp, do_benchmark=False):
+def encrypt_password(key, password, timestamp, do_benchmark=True):
     """
     Cifra la password usando la chiave fornita, salva il risultato nella cartella ciphers e (opzionalmente) esegue un benchmark delle modalità di cifratura.
 

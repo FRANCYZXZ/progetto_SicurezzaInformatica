@@ -43,7 +43,7 @@ CIPHER_MODE = "CTR"       # modalità di cifratura
 
 ## Uso
 
-1. Eseguire il programma principale
+Eseguire il programma principale
 
 ```
 python main.py
