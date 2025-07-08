@@ -9,10 +9,9 @@ def run_benchmarks(key, password):
     """
     Esegue il benchmark comparativo delle prestazioni dei vari algoritmi di cifratura
 
-    - Esegue ITERATIONS iterazioni di cifratura per ciascuna modalità specificata
+    - Esegue un numero prefissato di iterazioni di cifratura per ciascuna modalità specificata
     - Calcola il tempo medio di cifratura per ogni modalità in millisecondi
-    - Stampa i risultati su console in formato leggibile
-    - Salva i risultati in un file formato JSON all'interno della cartella `BENCHMARKS_DIR`
+    - Salva i risultati in un file formato JSON all'interno della cartella 'benchmarks'
     """
     results = benchmark_ciphers(key, password, modes_to_test=None)
     os.makedirs(FOLDER_BENCHMARKS, exist_ok=True)
@@ -33,7 +32,6 @@ def benchmark_ciphers(key, password, modes_to_test=None):
         key: la chiave di cifratura (deve avere lunghezza corretta per AES/ChaCha20)
         password: il testo da cifrare
         modes_to_test: lista delle modalità da testare, es. ["CBC", "GCM", ...]. Se None, usa tutte le modalità supportate
-        iterations: numero di ripetizioni per mediare il tempo
 
     Returns:
         dict: {mode_name: avg_time_in_seconds}

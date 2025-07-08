@@ -9,7 +9,7 @@ def record_audio():
     Registra audio dal microfono
 
     Returns:
-        numpy.ndarray: array monodimensionale dei campioni audio (int16)
+        numpy.ndarray: array monodimensionale dei campioni audio
     """
     print("Registrazione in corso...")
     try:
@@ -23,13 +23,13 @@ def record_audio():
 
 def save_audio(audio_samples):
     """
-    Salva i campioni audio in formato WAV nella cartella registrazioni
+    Salva i campioni audio in formato .wav nella cartella registrazioni
 
     Args:
         audio_samples: campioni audio da salvare
         
     Returns:
-        timestamp
+        timestamp: timestamp della registrazione
     """
     os.makedirs(FOLDER_RECORDINGS, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

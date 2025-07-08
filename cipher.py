@@ -16,7 +16,7 @@ def encrypt_password(key, password, timestamp, do_benchmark=True):
     Azioni:
         - Crea la cartella di destinazione se non esiste
         - Esegue la cifratura chiamando get_cipher
-        - Salva su file testo la modalità usata, IV o nonce, e il ciphertext esadecimale
+        - Salva su un file di testo la modalità usata, IV o nonce, e il ciphertext esadecimale
         - Se richiesto, esegue il benchmark e salva i risultati in formato JSON
         - Stampa messaggio di conferma con percorso del file salvato
     """

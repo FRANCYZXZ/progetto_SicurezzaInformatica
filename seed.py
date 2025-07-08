@@ -6,7 +6,7 @@ def extract_entropy(audio_samples):
     Estrae entropia dai campioni audio selezionando il bit meno significativo di ciascun sample
 
     Args:
-        audio_samples: campioni audio (int16)
+        audio_samples: campioni audio
 
     Returns:
         bytearray: bytes derivati dall'entropia, pronti per l'hash
@@ -19,7 +19,7 @@ def extract_entropy(audio_samples):
 
 def save_seed(seed_bytes, timestamp):
     """
-    Salva il seed crittografico calcolato (hash) in un file .txt
+    Salva il seed crittografico calcolato in un file .txt
 
     Args:
         seed_bytes: hash del seed

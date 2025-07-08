@@ -14,7 +14,7 @@ def select_seed_algorithm(entropy):
         entropy: dati casuali da cui derivare il seed
 
     Returns:
-        bytes: digest hash del seed calcolato
+        bytes: hash del seed calcolato
 
     Raises:
         ValueError: se l'algoritmo di hash specificato in configurazione non è supportato
