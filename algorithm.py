@@ -1,32 +1,32 @@
 import hashlib
 import secrets
+from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM, ChaCha20Poly1305
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives import padding
-from config import SEED_HASH_ALGORITHM, CIPHER_MODE
+from config import CIPHER_MODE
 
-def select_seed_algorithm(entropy):
+def derive_key_from_seed(seed):
     """
-    Applica un algoritmo di hash crittografico per generare un seed a partire da un buffer di entropia
+    Deriva una chiave crittografica da un seed usando HKDF con SHA256
 
     Args:
-        entropy: dati casuali da cui derivare il seed
+        seed: dati sorgente (entropia da audio)
 
     Returns:
-        bytes: hash del seed calcolato
-
-    Raises:
-        ValueError: se l'algoritmo di hash specificato in configurazione non è supportato
+        bytes: chiave a 32 byte derivata dal seed
     """
+    hkdf = HKDF(
+        algorithm = hashes.SHA256(),
+        length = 32,             
+        salt = None,             # Si può specificare un salt opzionale per aumentare la sicurezza
+        info = b'encryption',    # Informazioni opzionali per contestualizzare la chiave
+        backend = default_backend()
+    )
+    return hkdf.derive(seed)
 
-    if SEED_HASH_ALGORITHM.lower() == "sha256":
-        return hashlib.sha256(entropy).digest()
-    elif SEED_HASH_ALGORITHM.lower() == "md5":
-        return hashlib.md5(entropy).digest()
-    else:
-        raise ValueError(f"Algoritmo '{SEED_HASH_ALGORITHM}' non supportato. Scegli tra sha256 o md5")
-    
 def get_cipher(key, password, mode=None):
     """
     Cifra una password utilizzando la chiave fornita e la modalità di cifratura specificata

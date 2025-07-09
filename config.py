@@ -16,5 +16,4 @@ CHANNELS = 1                 # numero di canali audio (mono)
 
 TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-SEED_HASH_ALGORITHM = "md5"  # Algoritmo hash per il seed, possibili valori: "sha256", "md5"
 CIPHER_MODE = "CTR"          # Modalità di cifratura, possibili valori: "CBC", "CFB", "OFB", "CTR", "GCM", "CHACHA20"
